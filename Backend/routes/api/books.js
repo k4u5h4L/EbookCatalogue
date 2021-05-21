@@ -27,6 +27,7 @@ router.get("/", (req, res) => {
 // @description Get single book by id
 // @access Public
 router.get("/:id", (req, res) => {
+  console.log(req.params.id);
   Book.findById(req.params.id)
     .then((book) => res.json(book))
     .catch((err) => res.status(404).json({ nobookfound: "No Book found" }));

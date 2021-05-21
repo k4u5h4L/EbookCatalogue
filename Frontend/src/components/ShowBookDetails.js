@@ -12,14 +12,15 @@ class showBookDetails extends Component {
   }
 
   componentDidMount() {
-    // console.log("Print id: " + this.props.match.params.id);
+    console.log("Print id: " + this.props.match.params.id);
     axios
       .get("http://localhost:8082/api/books/" + this.props.match.params.id)
       .then((res) => {
-        // console.log("Print-showBookDetails-API-response: " + res.data);
+        console.log("Print-showBookDetails-API-response: " + res.data);
         this.setState({
           book: res.data,
         });
+        console.log(this.state.book);
       })
       .catch((err) => {
         console.log("Error from ShowBookDetails");

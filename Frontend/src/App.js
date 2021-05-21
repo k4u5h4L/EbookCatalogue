@@ -6,6 +6,7 @@ import CreateBook from "./components/CreateBook";
 import ShowBookList from "./components/ShowBookList";
 import ShowBookDetails from "./components/ShowBookDetails";
 import UpdateBookInfo from "./components/UpdateBookInfo";
+import ShowUserDetails from "./components/ShowUserDetails";
 import Navbar from "./components/layout/Navbar";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
@@ -31,6 +32,7 @@ class App extends Component {
             <Route path="/create-book" component={CreateBook} />
             <Route path="/edit-book/:id" component={UpdateBookInfo} />
             <Route path="/show-book/:id" component={ShowBookDetails} />
+            <Route path="/show-user/" component={ShowUserDetails} />
           </Switch>
         </Router>
       </AuthContextProvider>

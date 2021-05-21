@@ -4,6 +4,7 @@ import AuthContext from "../../context/AuthContext";
 
 function Register() {
   const [email, setemail] = useState("");
+  const [tier, settier] = useState("");
   const [password, setpassword] = useState("");
   const [passwordVerify, setpasswordVerify] = useState("");
 
@@ -14,11 +15,12 @@ function Register() {
     try {
       const registerData = {
         email,
+        tier,
         password,
         passwordVerify,
       };
-
-      await Axios.post("http://localhost:8082/auth/", registerData);
+      console.log(registerData);
+      await Axios.post("http://localhost:8082/auth/register", registerData);
       getLoggedIn();
     } catch (err) {
       console.log(err);
@@ -57,6 +59,47 @@ function Register() {
                   onChange={(e) => setpasswordVerify(e.target.value)}
                   value={passwordVerify}
                 />
+              </div>
+              <div className="form-group">
+                <input
+                  type="radio"
+                  name="Subcsription tier"
+                  value="tier1"
+                  id="tier1"
+                  // className="form-control"
+                  onChange={(e) => {
+                    settier(e.target.value);
+                    console.log(e.target.value);
+                  }}
+                />
+                <label for="tier1">Tier 1</label>
+                <br />
+                <input
+                  type="radio"
+                  name="Subcsription tier"
+                  value="tier2"
+                  id="tier2"
+                  // className="form-control"
+                  onChange={(e) => {
+                    settier(e.target.value);
+                    console.log(e.target.value);
+                  }}
+                />
+                <label for="tier2">Tier 2</label>
+                <br />
+                <input
+                  type="radio"
+                  name="Subcsription tier"
+                  value="tier3"
+                  id="tier3"
+                  // className="form-control"
+                  onChange={(e) => {
+                    settier(e.target.value);
+                    console.log(e.target.value);
+                  }}
+                />
+                <label for="tier3">Tier 3</label>
+                <br />
               </div>
               <button
                 type="submit"

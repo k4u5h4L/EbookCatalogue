@@ -6,12 +6,14 @@ const jwt = require("jsonwebtoken");
 
 router.post("/register", async (req, res) => {
   try {
-    const { email, password, passwordVerify } = req.body;
+    const { email, tier, password, passwordVerify } = req.body;
     console.log(email);
-
+    console.log(tier);
+    console.log(password);
+    console.log(passwordVerify);
     //validation
 
-    if (!email || !password || !passwordVerify)
+    if (!email || !password || !passwordVerify || !tier)
       return res.status(400).json({ errorMessage: "Please Enter all fields" });
 
     if (password.length < 6)
@@ -32,6 +34,7 @@ router.post("/register", async (req, res) => {
 
     const newUser = User({
       email,
+      tier,
       passwordHash,
     });
 
@@ -114,13 +117,36 @@ router.get("/loggedIn", (req, res) => {
   try {
     const token = req.cookies.token;
     if (!token) return res.json(false);
-
-    jwt.verify(token, process.env.JWT_SECRET);
+    // console.log(token);
+    const verified = jwt.verify(token, process.env.JWT_SECRET);
     res.send(true);
+    res.send(verified.user);
+    console.log(verified.user);
   } catch (err) {
     console.error(err);
     res.json(false);
   }
+});
+
+router.get("/user", (req, res) => {
+  try {
+    const token = req.cookies.token;
+    if (!token) return res.json(false);
+    // console.log(token);
+    const verified = jwt.verify(token, process.env.JWT_SECRET);
+    res.send(verified.user);
+    console.log(verified.user);
+  } catch (err) {
+    console.error(err);
+    res.json(false);
+  }
+});
+
+router.get("/:id", (req, res) => {
+  console.log(req.params.id);
+  User.findById(req.params.id)
+    .then((user) => res.json(user))
+    .catch((err) => res.status(404).json({ nobooksfound: "No Books found" }));
 });
 
 module.exports = router;
