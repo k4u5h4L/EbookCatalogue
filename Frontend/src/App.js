@@ -10,6 +10,9 @@ import ShowUserDetails from "./components/ShowUserDetails";
 import Navbar from "./components/layout/Navbar";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
+import SinglePagePDFViewer from "./components/pdf/single-page";
+import AllPagesPDFViewer from "./components/pdf/all-pages";
+import PDFReader from "./components/pdf/PDFReader";
 import AuthContext, { AuthContextProvider } from "./context/AuthContext";
 
 axios.defaults.withCredentials = true;
@@ -33,6 +36,7 @@ class App extends Component {
             <Route path="/edit-book/:id" component={UpdateBookInfo} />
             <Route path="/show-book/:id" component={ShowBookDetails} />
             <Route path="/show-user/" component={ShowUserDetails} />
+            <Route path="/read-book/:id" component={PDFReader} />
           </Switch>
         </Router>
       </AuthContextProvider>

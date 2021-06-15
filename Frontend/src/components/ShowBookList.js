@@ -78,18 +78,39 @@ class ShowBookList extends Component {
     const tier = this.state.user.tier;
     // console.log(tier);
     const books = this.state.books;
+    const books1 = [];
+    const books2 = [];
+    const books3 = [];
+    let bookList;
+    let bookList1, bookList2, bookList3;
+    let i1 = 0;
+    let i2 = 0;
+    let i3 = 0;
 
-    if (this.state.books[0]) console.log(this.state.books[0].title);
+    if (this.state.books[0]) {
+      console.log(books.length);
+      for (let i = 0; i < books.length; i++) {
+        if (books[i].genre == "Thriller") {
+          books1[i1++] = books[i];
+        } else if (books[i].genre == "Mystery") {
+          books2[i2++] = books[i];
+        } else if (books[i].genre == "Romance") {
+          books3[i3++] = books[i];
+        }
+      }
+    }
     // const username = this.state.username;
     // console.log(this.props.match.params.id);
     // console.log("PrintBook: " + books);
     // console.log(this.state.username);
-    let bookList;
 
     if (!books) {
       bookList = "there is no book recored!";
     } else {
       bookList = books.map((book, k) => <BookCard book={book} key={k} />);
+      bookList1 = books1.map((book, k) => <BookCard book={book} key={k} />);
+      bookList2 = books2.map((book, k) => <BookCard book={book} key={k} />);
+      bookList3 = books3.map((book, k) => <BookCard book={book} key={k} />);
     }
     const linkstyle = {
       color: "white",
@@ -118,9 +139,19 @@ class ShowBookList extends Component {
               <hr />
             </div>
           </div>
+          {tier == "tier1" && (
+            <>
+              <div className="list">{bookList1}</div>
+            </>
+          )}
           {tier == "tier2" && (
             <>
-              <div className="list">{bookList}</div>
+              <div className="list">{bookList2}</div>
+            </>
+          )}
+          {tier == "tier3" && (
+            <>
+              <div className="list">{bookList3}</div>
             </>
           )}
         </div>

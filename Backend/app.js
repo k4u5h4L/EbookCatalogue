@@ -5,6 +5,8 @@ const connectDB = require("./config/db");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 var cors = require("cors");
+// const fileUpload = require("express-fileupload");
+const path = require("path");
 
 dotenv.config();
 // routes
@@ -21,7 +23,8 @@ app.use(cors({ origin: true, credentials: true }));
 
 // Init Middleware
 app.use(express.json({ extended: false }));
-
+// app.use(fileUpload());
+app.use(express.static(path.join(__dirname, "..", "build")));
 // use Routes
 
 app.use("/api/books", books);
@@ -32,3 +35,7 @@ app.listen(port, () => console.log(`Server running on port ${port}`));
 
 app.get("/", (req, res) => res.send("BTS Paved the way!"));
 app.use("/auth", require("./routes/userRouter"));
+
+// app.listen(3000, () => {
+//   console.log("server started on port 3000");
+// });
